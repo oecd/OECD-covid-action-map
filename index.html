@@ -2,8 +2,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <head>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i|Oswald:200,300,400,500,600,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/site.css">
+
  <script src="libs/d3.v4.min.js"></script>
 	<script src="libs/d3.v4.jetpack.min.js"></script>
   	<script src="libs/d3-annotation.js"></script>
@@ -55,7 +57,6 @@
 	var labels = [];
   	
  	var countryData=[];
- 	var cityData=[];
 
   	d3.tsv("data/coord_country.tsv", function(error, coudata){
    	 	coudata.forEach(function(d){
@@ -64,16 +65,10 @@
    	})
   
 
-	d3.tsv("data/coord_cities.tsv", function (error, citdata) {
-		citdata.forEach(function (d) {
-			cityData.push(d);
-		})
-	})
 
 	var urls = {
 	    world: "data/world.json",
 	    country:"data/coord_country.tsv",
-		/**city: "data/coord_cities.tsv"**/
 		actions:"data/actions.tsv"
 	};
 
@@ -201,7 +196,8 @@
 					icuText= "</b><Br/><i>Intensive care unit Spots available</i>: <b>" + d.data.available_ICU + "</b>"
 				
 					var htmlText = "<b>" + d.data.Country + "</b>"+ "<Br/><i>Confirmed cases</i>: <b>"+ d.data.Confirmed_cases +"</b><Br/><i>Confirmed deaths</i>: <b>"+ d.data.Confirmed_deaths + icuText;
-				divMap.html(htmlText)
+				
+						divMap.html(htmlText)
 					.style("left", element.attr('cx') + "px")
 					.style("top", element.attr('cy') + "px");
 			})

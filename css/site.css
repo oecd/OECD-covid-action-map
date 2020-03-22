@@ -35,7 +35,7 @@ div.tooltip {
     max-width: 250px;
     margin-top: -1.25em;
     padding: 0.75em 1em;
-    font-family: "Oswald", sans-serif;
+    font-family: 'Oswald', sans-serif;
     /*white-space: nowrap;*/
     font-size: 20px;
     font-size: 1.33rem;
@@ -115,9 +115,8 @@ div.tooltip::after {
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
       /*pointer-events: none;*/  
 
-   
       margin-left: 1.2em;
-      font-family: "Oswald", sans-serif;
+      font-family: 'Oswald', sans-serif;
       font-size: 2rem;
       font-weight: 700;
       color: #04629a;
@@ -156,19 +155,18 @@ div.tooltip::after {
 #countrySel{
     padding-top: 10px;
     margin-left: 1.2em;
-    font-family: "Oswald", sans-serif;
-    font-size: 2rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
     font-weight: 700;
     line-height: 1.2;
     color: #04629a;
 }
 
 #updateTime{
-
-    margin-left: 1.5em;
-    font-family: "Oswald", sans-serif;
+    margin-left: 2.0em;
+    font-family: 'Oswald', sans-serif;
     font-size: 1.5rem;
-    font-weight: 300;
+    font-weight: 100;
     font-style: italic;
     line-height: 1;
     color: #04629a;
@@ -180,16 +178,16 @@ div.tooltip::after {
 }
 
 .SectionTitle{
-    font-family: "Noto Sans Display", sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     font-weight: 700;
-    font-size: 1.75rem;
+    font-size: 2rem;
     color: #0b1e2d;
 }
 
 .sectionText{
-margin-top:1em;
+    margin-top:0.75em;
     margin-left: 2em;
-    font-family: "Noto Sans Display", sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     font-weight: 300;
     font-size: 1.5rem;
     color: #0b1e2d;
