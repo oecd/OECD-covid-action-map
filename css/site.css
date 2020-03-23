@@ -133,7 +133,7 @@ div.tooltip::after {
       max-width: 1140px;
       max-height:500px;
       overflow: scroll;
-      padding:2rem;
+      /*padding:2rem;*/
       background: #FFFFFF;
       -webkit-border-radius: 2px;
       -moz-border-radius: 2px;
@@ -146,11 +146,15 @@ div.tooltip::after {
 }
 
 #shutterholder{
+  padding:2rem;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   background-color: white;
   width:100%;
+  border-bottom: 0.5px  solid #04629a;
+  z-index:3;
+
 }
 #shutter{
   float:right;  
@@ -180,6 +184,8 @@ div.tooltip::after {
 }
 
 #containment_Text,#supportText,#supportViz {
+
+  padding:2rem;
     margin-top: 10px;
     margin-left: 2em;
 }
@@ -189,8 +195,17 @@ div.tooltip::after {
     font-weight: 700;
     font-size: 2rem;
     color: #0b1e2d;
-}
+    position: relative;
+    bottom: -1rem;
+    background: #fff;
+    padding-right: 10px;
+    z-index:2;
 
+}
+.border{
+
+    border-bottom: 0.5px solid #0b1e2d;
+}
 .sectionText{
     margin-top:0.75em;
     margin-left: 2em;
@@ -276,3 +291,20 @@ annotation.badge path.subject-pointer, .annotation.badge path.subject {
 	margin-right: 2px;
 	margin-left:2px;
 }
+.domain{
+  stroke:none;
+}
+.tick{
+  stroke:#979797;
+  stroke-width: 0.25;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 100;
+  font-size: 1rem;
+  color: #0b1e2d;
+  }
+
+  .lollipopText{
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 100;
+  font-size: 1.2rem;
+  }

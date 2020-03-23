@@ -25,13 +25,16 @@
 	<div id="CountryCard">
 		<div id="shutterholder" >
 			<img id="shutter" src="img/cross.svg">
+		
+			<div id="countrySel">
+			</div>
+			<div id="updateTime"></div>
 		</div>
-		<div id="countrySel">
-		</div>
-		<div id="updateTime"></div>
 		<Br />
 		<div id="containment_Text">
+			<div class="border">
 			<span id="containement_Title" class="SectionTitle"></span>
+			</div>
 			<div id="quarantine_Text" class="SectionText"></div>
 			<div id="travel_Bans_Text" class="SectionText"></div>
 			<div id="schools_closure_Text" class="SectionText"></div>
@@ -39,7 +42,10 @@
 		</div>
 		<Br/>
 		<div id="supportText">
-			<span id="support_Title" class="SectionTitle"></span>
+
+			<div class="border">
+				<span id="support_Title" class="SectionTitle"></span>
+			</div>
 			<div id="Health_Text" class="SectionText"></div>
 			<div id="Overall_fiscal_measures_Text" class="SectionText"></div>
 			<div id="Fiscal_people_Text" class="SectionText"></div>
@@ -48,8 +54,9 @@
 		</div>
 		<Br/>	
 		<div id="supportViz">
-
-			<span id="supportViz_Title" class="SectionTitle">Country support</span>
+			<div class="border">
+				<span id="supportViz_Title" class="SectionTitle">Country support</span>
+			</div>
 			<div class="sectionText">as % of GDP</div>
 			<Br/>
 			<div id="vizDesc"></div>
@@ -65,6 +72,8 @@
 	var margin_chart
 	var xScale;
 	var yScale ;
+
+	var allData;
 
 
 
@@ -147,6 +156,7 @@
 
 
 	function render(err,world,country, actions){
+		allData=actions;
 		compChart(actions)
 		//Container for the gradients //https://www.visualcinnamon.com/2016/06/glow-filter-d3-visualization.html
 		var defs = worldMap.append("defs");
@@ -445,7 +455,8 @@
 				dimDescChart.append("g")
 					.attr("class", "axis y yAxis")
 					.attr("transform", "translate(" + margin_chart + ",0)")
-					.call(d3.axisLeft(yScale).ticks(null, "%"));
+					.call(d3.axisLeft(yScale)
+						.tickSize( -(popupWidth - margin_chart / 2- margin_chart)).ticks(null, "%"));
 
 
 				///Lollipop dimDesc
@@ -472,13 +483,14 @@
 							.duration(250)
 							.style("opacity", 1);
 					
-						var htmlText = "<b>" + d.Country + "<b><br> " + d3.format(".0%")(d.share_gdp) 
+						var htmlText = "<b>" + d.Country + "</b><br> " + d3.format(".0%")(d.share_gdp) + "<br> " + d3.format(",")(d.amount_effort) + "$"
 						
 							divMap.html(htmlText).style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
 
 					})
 					.on("mousemove", mousemove)
-					.on("mouseout", mouseout);
+					.on("mouseout", mouseout)
+					.on("click",function(d){ return updateCard(d.Country)});
 
 
 				var lollipopsText = dimDescChart.selectAll("circleText")
@@ -509,12 +521,13 @@
 						.duration(250)
 						.style("opacity", 1);
 
-						var htmlText = "<b>" + d.Country + "<b><br> " + d3.format(".0%")(d.share_gdp)
+						var htmlText = "<b>" + d.Country + "</b><br> " + d3.format(".0%")(d.share_gdp) + "<br> " + d3.format(",")(d.amount_effort) + "$"
 
 						divMap.html(htmlText).style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
 					})
 					.on("mousemove", mousemove)
-					.on("mouseout", mouseout);;;
+					.on("mouseout", mouseout)
+					.on("click",function(d){ return updateCard(d.Country)});;;
 
 				var lollipopsLine = dimDescChart.selectAll("circleLine")
 					.data(data)
@@ -551,12 +564,13 @@
 						.duration(250)
 						.style("opacity", 1);
 
-						var htmlText = "<b>" + d.Country + "<b><br> " + d3.format(".0%")(d.share_gdp)
+						var htmlText = "<b>" + d.Country + "</b><br> " + d3.format(".0%")(d.share_gdp) + "<br> " + d3.format(",")(d.amount_effort) + "$"
 
 						divMap.html(htmlText).style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
 					})
 					.on("mousemove", mousemove)
-					.on("mouseout", mouseout);;;
+					.on("mouseout", mouseout)
+					.on("click",function(d){ return updateCard(d.Country)});
 
 
 			}
@@ -576,7 +590,7 @@
 
 				var dimDescChart = d3.select('#vizDesc').html('')
 					.append('svg')
-					.attrs({ width: popupWidth, height: heightChart })
+					.attrs({ width: popupWidth, height: heightChart , id: "compareChart" })
 
 
 
@@ -605,7 +619,7 @@
 				dimDescChart.append("g")
 					.attr("class", "axis y yAxis")
 					.attr("transform", "translate(" + 0 + ","+ margin_chart / 2+")")
-					.call(d3.axisTop(yScale));
+					.call(d3.axisTop(yScale).tickSize(-(heightChart - margin_chart / 2 - margin_chart / 2)).ticks(null, "%"));
 
 
 				///Lollipop dimDesc
@@ -632,12 +646,13 @@
 						.duration(250)
 						.style("opacity", 1);
 
-						var htmlText = "<b>" + d.Country + "<b><br> " + d3.format(".0%")(d.share_gdp)
+						var htmlText = "<b>" + d.Country + "</b><br> " + d3.format(".0%")(d.share_gdp) + "<br> " + d3.format(",")(d.amount_effort) + "$"
 
 						divMap.html(htmlText).style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
 					})
 					.on("mousemove", mousemove)
-					.on("mouseout", mouseout);
+					.on("mouseout", mouseout)
+					.on("click",function(d){ return updateCard(d.Country)});
 
 
 				var lollipopsText = dimDescChart.selectAll("circleText")
@@ -668,12 +683,13 @@
 						.duration(250)
 						.style("opacity", 1);
 
-						var htmlText = "<b>" + d.Country + "<b><br> " + d3.format(".0%")(d.share_gdp)
+						var htmlText = "<b>" + d.Country + "</b><br> " + d3.format(".0%")(d.share_gdp) + "<br> " + d3.format(",")(d.amount_effort) + "$"
 
 						divMap.html(htmlText).style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
 					})
 					.on("mousemove", mousemove)
-					.on("mouseout", mouseout);;;
+					.on("mouseout", mouseout)
+					.on("click",function(d){ return updateCard(d.Country)});;;
 
 				var lollipopsLine = dimDescChart.selectAll("circleLine")
 					.data(data)
@@ -710,12 +726,13 @@
 						.duration(250)
 						.style("opacity", 1);
 
-						var htmlText = "<b>" + d.Country + "<b><br> " + d3.format(".0%")(d.share_gdp)
+						var htmlText = "<b>" + d.Country + "</b><br> " + d3.format(".0%")(d.share_gdp) + "<br> " + d3.format(",")(d.amount_effort) + "$"
 
 						divMap.html(htmlText).style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
 					})
 					.on("mousemove", mousemove)
-					.on("mouseout", mouseout);;;
+					.on("mouseout", mouseout)
+					.on("click",function(d){ return updateCard(d.Country)});;;
 
 			}
 
@@ -724,28 +741,106 @@
 		}	
 	
 		function highlight(countryName,couNum){
-d3.selectAll(".highlightBar").remove()
+			d3.selectAll(".highlightBar").remove();
+			
 			if (popupWidth > 800){
-
 				d3.select("#compareChart").append("rect")
-				.attr("class","highlightBar")
-				.attr("x", xScale(countryName))
-				.attr("y", 0)
-				.attr("width", (popupWidth - margin_chart / 2 - margin_chart) / couNum)
-				.attr("height", heightChart)
-				.attr("fill","white")
-				.attr("opacity", 0.5);
+					.attr("class","highlightBar")
+					.attr("x", xScale(countryName)-0.5* (popupWidth - margin_chart / 2 - margin_chart) / couNum)
+					.attr("y", 0)
+					.attr("width", 1.5*(popupWidth - margin_chart / 2 - margin_chart) / couNum)
+					.attr("height", heightChart)
+					.attr("fill","white")
+					.attr("opacity", 0.5);
 			}
 			else{
+
 				d3.select("#compareChart").append("rect")
 					.attr("class", "highlightBar")
 					.attr("x", 0)
-					.attr("y", xScale(countryName))
+					.attr("y", xScale(countryName)- 0.3*(heightChart - margin_chart / 2 - margin_chart) / couNum)
 					.attr("width", popupWidth)
-					.attr("height", 10)
+					.attr("height", 1.5*(heightChart - margin_chart / 2 - margin_chart) / couNum)
 					.attr("fill", "white")
 					.attr("opacity",0.5);
 			}
+
+		}
+
+		function updateCard(couName){
+console.log(allData)
+console.log(couName)
+var temp= allData.filter(function (d) { return d.Country == couName })
+
+			console.log(temp)
+			document.getElementById("CountryCard").style.display = 'block';
+			document.getElementById("modedemploi").style.display = 'none';
+
+			highlight(couName, allData.filter(function (d) { return d.share_gdp != "" }).length)
+
+			document.getElementById("countrySel").innerHTML = temp[0].Country;
+
+			document.getElementById("updateTime").innerHTML = "updated on " + temp[0].update;
+
+			if (temp[0].quarantines == "" && temp[0].travel_Bans == "" && temp[0].schools_closure == "" && temp[0].public_events_cancel == "")
+				document.getElementById("containement_Title").innerHTML = ""
+			else
+				document.getElementById("containement_Title").innerHTML = "Containment measures"
+
+			if (temp[0].quarantines == "")
+				document.getElementById("quarantine_Text").innerHTML = ""
+			else
+				document.getElementById("quarantine_Text").innerHTML = "<b>Quarantines</b><Br/>" + temp[0].quarantines
+
+			if (temp[0].travel_Bans == "")
+				document.getElementById("travel_Bans_Text").innerHTML = ""
+			else
+				document.getElementById("travel_Bans_Text").innerHTML = "<b>Travel bans/restrictions</b><Br/>" + temp[0].travel_Bans
+
+			if (temp[0].schools_closure == "")
+				document.getElementById("schools_closure_Text").innerHTML = ""
+			else
+				document.getElementById("schools_closure_Text").innerHTML = "<b>Closure of schools</b><Br/>" + temp[0].schools_closure
+
+			if (temp[0].public_events_cancel == "")
+				document.getElementById("public_events_cancel_Text").innerHTML = ""
+			else
+				document.getElementById("public_events_cancel_Text").innerHTML = "<b>Cancellation of public events/Closure of public places</b><Br/>" + temp[0].public_events_cancel
+
+
+			if (temp[0].Health == "" && temp[0].Overall_fiscal_measures == "" && temp[0].Fiscal_people == "" && temp[0].Fiscal_firm == "" && temp[0].Monetary_Prudential == "")
+				document.getElementById("support_Title").innerHTML = ""
+			else
+				document.getElementById("support_Title").innerHTML = "Support measures"
+
+			if (temp[0].Health == "")
+				document.getElementById("Health_Text").innerHTML = ""
+
+			else
+				document.getElementById("Health_Text").innerHTML = "<b>Health</b><Br/>" + temp[0].Health
+
+			if (temp[0].Overall_fiscal_measures == "")
+				document.getElementById("Overall_fiscal_measures_Text").innerHTML = ""
+
+			else
+				document.getElementById("Overall_fiscal_measures_Text").innerHTML = "<b>Overall fiscal measures</b><Br/>" + temp[0].Overall_fiscal_measures
+
+			if (temp[0].Fiscal_people == "")
+				document.getElementById("Fiscal_people_Text").innerHTML = ""
+
+			else
+				document.getElementById("Fiscal_people_Text").innerHTML = "<b>Fiscal - people specific</b><Br/>" + temp[0].Fiscal_people
+
+			if (temp[0].Fiscal_firm == "")
+				document.getElementById("Fiscal_firm_Text").innerHTML = ""
+			else
+				document.getElementById("Fiscal_firm_Text").innerHTML = "<b>Fiscal - firm specific</b><Br/>" + temp[0].Fiscal_firm
+
+			if (temp[0].Monetary_Prudential == "")
+				document.getElementById("Monetary_Prudential_Text").innerHTML = ""
+
+			else
+				document.getElementById("Monetary_Prudential_Text").innerHTML = "<b>Monetary/Macro Prudential</b><Br/>" + temp[0].Monetary_Prudential
 
 		}
 	
