@@ -23,7 +23,9 @@
 
 	<div id="modedemploi">Mouse over the countries and click to find out more information</div>
 	<div id="CountryCard">
-		<img id="shutter" src="img/cross.svg">
+		<div id="shutterholder" >
+			<img id="shutter" src="img/cross.svg">
+		</div>
 		<div id="countrySel">
 		</div>
 		<div id="updateTime"></div>
@@ -44,11 +46,31 @@
 			<div id="Fiscal_firm_Text" class="SectionText"></div>
 			<div id="Monetary_Prudential_Text" class="SectionText"></div>
 		</div>
+		<Br/>	
+		<div id="supportViz">
+
+			<span id="supportViz_Title" class="SectionTitle">Country support</span>
+			<div class="sectionText">as % of GDP</div>
+			<Br/>
+			<div id="vizDesc"></div>
 	</div>
 	<Br />
 
 </body>
 <script type="text/javascript">
+
+
+	var popupWidth;
+	var heightChart ;
+	var margin_chart
+	var xScale;
+	var yScale ;
+
+
+
+
+
+
 	var tabCoord=[];
 
 	var genderData=[];
@@ -125,6 +147,7 @@
 
 
 	function render(err,world,country, actions){
+		compChart(actions)
 		//Container for the gradients //https://www.visualcinnamon.com/2016/06/glow-filter-d3-visualization.html
 		var defs = worldMap.append("defs");
 
@@ -195,9 +218,9 @@
 				else
 					icuText= "</b><Br/><i>Intensive care unit Spots available</i>: <b>" + d.data.available_ICU + "</b>"
 				
-					var htmlText = "<b>" + d.data.Country + "</b>"+ "<Br/><i>Confirmed cases</i>: <b>"+ d.data.Confirmed_cases +"</b><Br/><i>Confirmed deaths</i>: <b>"+ d.data.Confirmed_deaths + icuText;
+				var htmlText = "<b>" + d.data.Country + "</b>"+ /**"<Br/><i>Confirmed cases</i>: <b>"+ d.data.Confirmed_cases +"</b><Br/><i>Confirmed deaths</i>: <b>"+ d.data.Confirmed_deaths  + **/ icuText;
 				
-						divMap.html(htmlText)
+				divMap.html(htmlText)
 					.style("left", element.attr('cx') + "px")
 					.style("top", element.attr('cy') + "px");
 			})
@@ -211,8 +234,8 @@
 
 				document.getElementById("CountryCard").style.display = 'block';
 				document.getElementById("modedemploi").style.display = 'none';
-				//d3.select("#modedemploi").style("display", "none")
-				//	d3.select("#CountryCard").style("display", "block")
+				
+				highlight(d.data.Country, actions.filter(function (d) { return d.share_gdp != "" }).length)
 
 				document.getElementById("countrySel").innerHTML=d.data.Country;
 
@@ -344,6 +367,388 @@
 
 
 	}
+	
+
+		function compChart(data) {
+		
+			var colorChart="#662D91"
+
+			if(window.innerWidth>=1140)
+				 popupWidth= 0.95* 1140;
+			else
+				popupWidth = 0.95 * window.innerWidth;
+
+
+			var lollipopRadius;
+			if (popupWidth > 1200) lollipopRadius = 10; else if (popupWidth > 700) lollipopRadius = 8; else lollipopRadius = 5; 
+			
+			
+
+			margin_chart=100;
+			var padding=0;
+			var guides= ["←  less support", " more support  →"]
+			
+
+			var mousemove = function () {
+				return divMap.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+			}
+
+			var mouseout = function () { return 
+				divMap.transition()
+					.duration(250)
+					.style("opacity", 0); } 
+
+
+			
+
+
+			if (popupWidth > 800) {
+
+				heightChart = 0.5 * window.innerHeight;
+
+				xScale = d3.scaleBand()
+					.domain(data.filter(function (d) { return d.share_gdp != "" }).sort(function (a, b) { return parseFloat(a.share_gdp) - parseFloat(b.share_gdp); }).map(function (d) { return d.Country }))
+					.range([margin_chart, popupWidth - margin_chart / 2])
+					.padding(padding);
+
+				yScale = d3.scaleLinear()
+					.domain([0, 1])
+					.range([heightChart - margin_chart, margin_chart / 3]);
+
+				var dimDescChart = d3.select('#vizDesc').html('')
+					.append('svg')
+					.attrs({ width: popupWidth, height: heightChart,id:"compareChart" })
+
+
+				var dimDescGuide = dimDescChart.append("text")
+					.attr("x", 0)
+					.attr("y", 0)
+					.append("tspan")
+					.attr("id", "chartGuideDimDesc")
+					.attr("x", margin_chart)
+					.attr("y", heightChart - margin_chart / 10)
+					.html(guides[0])
+				//.call(wrap,0.25*width);
+
+				var dimDescGuideEnd = dimDescChart.append("text")
+					.attr("x", 0)
+					.attr("y", 0)
+					.append("tspan")
+					.attr("id", "chartGuideDimDescEnd")
+					.attr("x", popupWidth - margin_chart / 2)
+					.attr("y", heightChart - margin_chart / 10)
+					.html(guides[1])
+					.style("text-anchor", "end")
+
+
+				//Create Y axis
+				dimDescChart.append("g")
+					.attr("class", "axis y yAxis")
+					.attr("transform", "translate(" + margin_chart + ",0)")
+					.call(d3.axisLeft(yScale).ticks(null, "%"));
+
+
+				///Lollipop dimDesc
+				var lollipopsCircle = dimDescChart.selectAll("circle")
+					.data(data)
+					.enter().append("circle")
+					.attr("class", "lollipopCircle")
+					.attr("r", lollipopRadius)
+					.attr("cx", function (d) {
+						if (d.share_gdp === "NA")
+							return "-10";
+						else
+							return xScale(d.Country) + xScale.bandwidth() / 2;
+					})
+					.attr("cy", function (d) {
+						if (d.share_gdp === "NA")
+							return "-10";
+						else
+							return yScale(d.share_gdp);
+					})
+					.attr("fill", colorChart)
+					.on("mouseover", function (d) {
+						divMap.transition()
+							.duration(250)
+							.style("opacity", 1);
+					
+						var htmlText = "<b>" + d.Country + "<b><br> " + d3.format(".0%")(d.share_gdp) 
+						
+							divMap.html(htmlText).style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+
+					})
+					.on("mousemove", mousemove)
+					.on("mouseout", mouseout);
+
+
+				var lollipopsText = dimDescChart.selectAll("circleText")
+					.data(data)
+					.enter().append("text")
+					.attr("class", "lollipopText")
+
+					.attr("transform", "translate(-3,15)rotate(-90)")
+					.attr("dy", function (d) {
+						if (d.share_gdp == "NA")
+							return "-10";
+						else
+							return xScale(d.Country) + xScale.bandwidth() / 2;
+					})
+					.attr("dx", function (d) {
+						if (d.share_gdp == "NA")
+							return "-10";
+						else
+							return -yScale(d.share_gdp);
+					})
+					.text(function (d) {
+						return d.Country;
+					})
+					.attr("text-anchor", "end")
+					.attr("fill", colorChart)
+					.on("mouseover", function (d) {
+						divMap.transition()
+						.duration(250)
+						.style("opacity", 1);
+
+						var htmlText = "<b>" + d.Country + "<b><br> " + d3.format(".0%")(d.share_gdp)
+
+						divMap.html(htmlText).style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+					})
+					.on("mousemove", mousemove)
+					.on("mouseout", mouseout);;;
+
+				var lollipopsLine = dimDescChart.selectAll("circleLine")
+					.data(data)
+					.enter().append("line")
+					.attr("class", "lollipopLine")
+					.attr("x1", function (d) {
+						if (d.share_gdp == "NA")
+							return "-10";
+						else
+							return xScale(d.Country) + xScale.bandwidth() / 2;
+					})
+					.attr("x2", function (d) {
+						if (d.share_gdp == "NA")
+							return "-10";
+						else
+							return xScale(d.Country) + xScale.bandwidth() / 2;
+					})
+					.attr("y1", function (d) {
+						if (d.share_gdp == "NA")
+							return "-10";
+						else
+							return yScale(0);
+					})
+					.attr("y2", function (d) {
+						if (d.share_gdp == "NA")
+							return "-10";
+						else
+							return yScale(d.share_gdp);
+					})
+					.attr("stroke", colorChart)
+					.attr("stroke-width", "1")
+					.on("mouseover", function (d) {
+						divMap.transition()
+						.duration(250)
+						.style("opacity", 1);
+
+						var htmlText = "<b>" + d.Country + "<b><br> " + d3.format(".0%")(d.share_gdp)
+
+						divMap.html(htmlText).style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+					})
+					.on("mousemove", mousemove)
+					.on("mouseout", mouseout);;;
+
+
+			}
+			else {
+				heightChart = window.innerHeight ;
+
+				xScale = d3.scaleBand()
+					.domain(data.filter(function (d) { return d.share_gdp != "NA" }).sort(function (a, b) { return parseFloat(a.share_gdp) - parseFloat(b.share_gdp); }).map(function (d) { return d.Country }))
+					.range([heightChart - margin_chart/2, margin_chart / 2])
+					.padding(padding);
+
+
+				yScale = d3.scaleLinear()
+					.domain([0, 1])
+					.range([margin_chart/2, popupWidth - margin_chart ]);
+
+
+				var dimDescChart = d3.select('#vizDesc').html('')
+					.append('svg')
+					.attrs({ width: popupWidth, height: heightChart })
+
+
+
+				var dimDescGuide = dimDescChart.append("text")
+					.attr("x", 0)
+					.attr("y", 0)
+					.append("tspan")
+					.attr("id", "chartGuideDimDesc")
+					.attr("x", margin_chart)
+					.attr("y", heightChart - margin_chart / 4)
+					.html(guides[0])
+				//.call(wrap,0.25*width);
+
+				var dimDescGuideEnd = dimDescChart.append("text")
+					.attr("x", 0)
+					.attr("y", 0)
+					.append("tspan")
+					.attr("id", "chartGuideDimDescEnd")
+					.attr("x", popupWidth - margin_chart )
+					.attr("y", margin_chart / 8)
+					.html(guides[1])
+					.style("text-anchor", "end")
+
+
+				//Create Y axis
+				dimDescChart.append("g")
+					.attr("class", "axis y yAxis")
+					.attr("transform", "translate(" + 0 + ","+ margin_chart / 2+")")
+					.call(d3.axisTop(yScale));
+
+
+				///Lollipop dimDesc
+				var lollipopsCircle = dimDescChart.selectAll("circle")
+					.data(data)
+					.enter().append("circle")
+					.attr("class", "lollipopCircle")
+					.attr("r", lollipopRadius)
+					.attr("cy", function (d) {
+						if (d.share_gdp === "NA")
+							return "-10";
+						else
+							return xScale(d.Country) + xScale.bandwidth() / 2;
+					})
+					.attr("cx", function (d) {
+						if (d.share_gdp === "NA")
+							return "-10";
+						else
+							return yScale(d.share_gdp);
+					})
+					.attr("fill", colorChart)
+					.on("mouseover", function (d) {
+						divMap.transition()
+						.duration(250)
+						.style("opacity", 1);
+
+						var htmlText = "<b>" + d.Country + "<b><br> " + d3.format(".0%")(d.share_gdp)
+
+						divMap.html(htmlText).style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+					})
+					.on("mousemove", mousemove)
+					.on("mouseout", mouseout);
+
+
+				var lollipopsText = dimDescChart.selectAll("circleText")
+					.data(data)
+					.enter().append("text")
+					.attr("class", "lollipopText")
+
+					.attr("transform", "translate(-10,-3)")
+					.attr("dy", function (d) {
+						if (d.share_gdp == "NA")
+							return "-10";
+						else
+							return xScale(d.Country) + xScale.bandwidth() / 2;
+					})
+					.attr("dx", function (d) {
+						if (d.share_gdp == "NA")
+							return "-10";
+						else
+							return yScale(d.share_gdp);
+					})
+					.text(function (d) {
+						return d.Country;
+					})
+					.attr("text-anchor", "end")
+					.attr("fill", colorChart)
+					.on("mouseover", function (d) {
+						divMap.transition()
+						.duration(250)
+						.style("opacity", 1);
+
+						var htmlText = "<b>" + d.Country + "<b><br> " + d3.format(".0%")(d.share_gdp)
+
+						divMap.html(htmlText).style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+					})
+					.on("mousemove", mousemove)
+					.on("mouseout", mouseout);;;
+
+				var lollipopsLine = dimDescChart.selectAll("circleLine")
+					.data(data)
+					.enter().append("line")
+					.attr("class", "lollipopLine")
+					.attr("y1", function (d) {
+						if (d.share_gdp == "NA")
+							return "-10";
+						else
+							return xScale(d.Country) + xScale.bandwidth() / 2;
+					})
+					.attr("y2", function (d) {
+						if (d.share_gdp == "NA")
+							return "-10";
+						else
+							return xScale(d.Country) + xScale.bandwidth() / 2;
+					})
+					.attr("x1", function (d) {
+						if (d.share_gdp == "NA")
+							return "-10";
+						else
+							return yScale(0);
+					})
+					.attr("x2", function (d) {
+						if (d.share_gdp == "NA")
+							return "-10";
+						else
+							return yScale(d.share_gdp);
+					})
+					.attr("stroke", colorChart)
+					.attr("stroke-width", "1")
+					.on("mouseover", function (d) {
+						divMap.transition()
+						.duration(250)
+						.style("opacity", 1);
+
+						var htmlText = "<b>" + d.Country + "<b><br> " + d3.format(".0%")(d.share_gdp)
+
+						divMap.html(htmlText).style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+					})
+					.on("mousemove", mousemove)
+					.on("mouseout", mouseout);;;
+
+			}
+
+
+
+		}	
+	
+		function highlight(countryName,couNum){
+d3.selectAll(".highlightBar").remove()
+			if (popupWidth > 800){
+
+				d3.select("#compareChart").append("rect")
+				.attr("class","highlightBar")
+				.attr("x", xScale(countryName))
+				.attr("y", 0)
+				.attr("width", (popupWidth - margin_chart / 2 - margin_chart) / couNum)
+				.attr("height", heightChart)
+				.attr("fill","white")
+				.attr("opacity", 0.5);
+			}
+			else{
+				d3.select("#compareChart").append("rect")
+					.attr("class", "highlightBar")
+					.attr("x", 0)
+					.attr("y", xScale(countryName))
+					.attr("width", popupWidth)
+					.attr("height", 10)
+					.attr("fill", "white")
+					.attr("opacity",0.5);
+			}
+
+		}
+	
 	d3.select("#shutter")
 	.on("mouseover",function(){
 		d3.select(this).style("opacity",0.5);
@@ -353,6 +758,7 @@
 	})
 	.on("click",function(){
 		document.getElementById("CountryCard").style.display = 'none';
+
 		//d3.select("#CountryCard").transition(1000).style("display","none")
 	})
 

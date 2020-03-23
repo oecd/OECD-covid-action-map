@@ -98,7 +98,7 @@ div.tooltip::after {
 
 #modedemploi{
       position:absolute;
-      top:90%;
+      top:5%;
       left: 0; 
       right: 0; 
       margin-left: auto; 
@@ -145,6 +145,13 @@ div.tooltip::after {
       display:none;    
 }
 
+#shutterholder{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  width:100%;
+}
 #shutter{
   float:right;  
   width:20px;
@@ -172,7 +179,7 @@ div.tooltip::after {
     color: #04629a;
 }
 
-#containment_Text,#supportText{
+#containment_Text,#supportText,#supportViz {
     margin-top: 10px;
     margin-left: 2em;
 }
@@ -262,3 +269,10 @@ annotation.badge path.subject-pointer, .annotation.badge path.subject {
       font-color: #575757;
       font : 14px Caecilia lt bold; fill:#575757;
     }
+
+
+#vizDesc {
+	background: #dce2e7;
+	margin-right: 2px;
+	margin-left:2px;
+}
