@@ -103,8 +103,8 @@ div.tooltip::after {
       right: 0; 
       margin-left: auto; 
       margin-right: auto;
-      width:95%;
-      max-width: 1140px;
+      max-width:500px;
+      
       padding:1rem;
       background: #FFFFFF;
       -webkit-border-radius: 2px;
@@ -173,6 +173,17 @@ div.tooltip::after {
     color: #04629a;
 }
 
+#betaTag{
+
+    margin-left: 2.0em;
+    margin-bottom:10px;
+    font-family: 'Oswald', sans-serif;
+    font-style: normal;
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1;
+    color: #04629a;
+}
 #updateTime{
     margin-left: 2.0em;
     font-family: 'Oswald', sans-serif;
@@ -308,3 +319,63 @@ annotation.badge path.subject-pointer, .annotation.badge path.subject {
   font-weight: 100;
   font-size: 1.2rem;
   }
+
+
+
+
+
+
+#selCountry{
+  /*float:left;*/
+  max-width:450px;
+  margin-bottom:7px;
+  border:solid;
+  border-width: 0px;
+  border-color:  #575757;
+  background-color: #04629a;/** CHange background color for dropdowns**/
+  border-radius: 10px;
+}
+
+#selCountry{
+  background-color: none;/** CHange background color for dropdowns**/
+}
+
+#country_dropdown{
+  margin: 2px 0px 5px 10px;
+  display:inline;
+ font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    color: #0b1e2d;
+  
+  text-align:center;
+  letter-spacing:normal;
+  vertical-align: baseline;
+  /*color: white;*/
+  cursor: pointer;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 1px 0;
+  background-color:#fff;/**#c3d1da;**/
+  border:none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+.dropdown_text{
+  margin-left:5px;
+  font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    color: #ffffff;
+  text-align:start;
+
+  padding:5px 25px 5px 10px;
+}
+
+#source{
+margin-left:5%;
+ font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    font-style:italic;
+    color: #04629a;
+
+}
