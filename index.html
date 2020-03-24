@@ -21,13 +21,73 @@
 	<div id="aboutMap"></div>
 	<Br/>
 
-	<div id="modedemploi">Mouse over the countries and click to find out more information</div>
+
+	<Br/>
+	<div id="modedemploi">Mouse over countries and click for more information   
+				<div id="selCountry">
+					<div class="dropdown_text">Or select a country: </div>
+					<select id="country_dropdown"
+						onchange="updateCard(value)">
+						<option value="-" selected="selected"> - </option>
+						<option value="Argentina">Argentina</option>
+						<option value="Australia" >Australia</option>
+						<option value="Austria">Austria</option>
+						<option value="Belgium">Belgium</option>
+						<option value="Bulgaria">Bulgaria</option>
+						<option value="Brazil">Brazil</option>
+						<option value="Canada">Canada</option>
+						<option value="Chile">Chile</option>
+						<option value="China">China</option>
+						<option value="Colombia">Colombia</option>
+						<option value="Costa Rica">Costa Rica</option>
+						<option value="Czech Republic">Czech Republic</option>
+						<option value="Denmark">Denmark</option>
+						<!--<option value="Estonia">Estonia</option>-->
+						<option value="European Union">European Union</option>
+						<option value="Finland">Finland</option>
+						<option value="France">France</option>
+						<option value="Germany">Germany</option>
+						<option value="Greece">Greece</option>
+						<option value="Hungary">Hungary</option>
+						<option value="Indonesia">Indonesia</option>
+						<option value="India">India</option>
+						<option value="Ireland">Ireland</option>
+						<option value="Iceland">Iceland</option>
+						<option value="Israel">Israel</option>
+						<option value="Italy">Italy</option>
+						<option value="Japan">Japan</option>
+						<option value="Korea">Korea</option>
+						<option value="Latvia">Latvia</option>
+						<option value="Lithuania">Lithuania</option>
+						<option value="Luxembourg">Luxembourg</option>
+						<option value="Mexico">Mexico</option>
+						<option value="Netherlands">Netherlands</option>
+						<option value="New Zealand">New Zealand</option>
+						<option value="Norway">Norway</option>
+						<option value="Poland">Poland</option>
+						<option value="Portugal">Portugal</option>
+						<option value="Romania">Romania</option>
+						<option value="Russia">Russia</option>
+						<option value="Saudi Arabia">Saudi Arabia</option>
+						<option value="Slovak Republic">Slovak Republic</option>
+						<option value="Slovenia">Slovenia</option>
+						<option value="South Africa">South Africa</option>
+						<option value="Spain">Spain</option>
+						<option value="Sweden">Sweden</option>
+						<option value="Switzerland">Switzerland</option>
+						<option value="Turkey">Turkey</option>
+						<option value="United Kingdom">United Kingdom</option>
+						<option value="United States">United States</option>
+						<!--</optgroup>-->
+					</select>
+				</div>
+	</div>
 	<div id="CountryCard">
 		<div id="shutterholder" >
 			<img id="shutter" src="img/cross.svg">
 		
-			<div id="countrySel">
-			</div>
+			<div id="countrySel"></div>
+			<div id="betaTag">&nbsp;Beta</div>
 			<div id="updateTime"></div>
 		</div>
 		<Br />
@@ -53,15 +113,17 @@
 			<div id="Monetary_Prudential_Text" class="SectionText"></div>
 		</div>
 		<Br/>	
-		<div id="supportViz">
+		<!--<div id="supportViz">
 			<div class="border">
 				<span id="supportViz_Title" class="SectionTitle">Country support</span>
 			</div>
 			<div class="sectionText">as % of GDP</div>
 			<Br/>
 			<div id="vizDesc"></div>
+		</div>-->
 	</div>
 	<Br />
+	<a id="source" href="https://github.com/gitvfd/OECD-covid-action-map/blob/CoronavirusUpdate_AllCountries_Public.xlsx" target="_blank">Download the data</a>
 
 </body>
 <script type="text/javascript">
@@ -157,7 +219,7 @@
 
 	function render(err,world,country, actions){
 		allData=actions;
-		compChart(actions)
+		//compChart(actions)
 		//Container for the gradients //https://www.visualcinnamon.com/2016/06/glow-filter-d3-visualization.html
 		var defs = worldMap.append("defs");
 
@@ -194,10 +256,19 @@
 	      	.attr("cy",function(d){
 		        	return projection([d.lng,d.lat])[1];
 	      	})
-	      	.attr("r",width/300)
-	      	.attr("fill","#F58380")
+	      	.attr("r", function (d) {
+				if (d.ISO3 == "EU" || d.ISO3 == "SEA")
+					return width / 220;
+				else
+					return width / 300;
+			})
+	      	.attr("fill",function(d){
+				  if(d.ISO3=="EU"|| d.ISO3 == "SEA")
+				 	 return "#000875";
+				  else
+				  	return "#04629a";
+			  })
 	  		
-		
 
 
 
@@ -228,7 +299,7 @@
 				else
 					icuText= "</b><Br/><i>Intensive care unit Spots available</i>: <b>" + d.data.available_ICU + "</b>"
 				
-				var htmlText = "<b>" + d.data.Country + "</b>"+ /**"<Br/><i>Confirmed cases</i>: <b>"+ d.data.Confirmed_cases +"</b><Br/><i>Confirmed deaths</i>: <b>"+ d.data.Confirmed_deaths  + **/ icuText;
+				var htmlText = "<b>" + d.data.Country + "</b>"/**+ "<Br/><i>Confirmed cases</i>: <b>"+ d.data.Confirmed_cases +"</b><Br/><i>Confirmed deaths</i>: <b>"+ d.data.Confirmed_deaths   icuText+ **/;
 				
 				divMap.html(htmlText)
 					.style("left", element.attr('cx') + "px")
@@ -245,7 +316,7 @@
 				document.getElementById("CountryCard").style.display = 'block';
 				document.getElementById("modedemploi").style.display = 'none';
 				
-				highlight(d.data.Country, actions.filter(function (d) { return d.share_gdp != "" }).length)
+				//highlight(d.data.Country, actions.filter(function (d) { return d.share_gdp != "" }).length)
 
 				document.getElementById("countrySel").innerHTML=d.data.Country;
 
@@ -740,7 +811,7 @@
 
 		}	
 	
-		function highlight(countryName,couNum){
+		/**function highlight(countryName,couNum){
 			d3.selectAll(".highlightBar").remove();
 			
 			if (popupWidth > 800){
@@ -766,17 +837,16 @@
 			}
 
 		}
-
+**/
 		function updateCard(couName){
-console.log(allData)
-console.log(couName)
-var temp= allData.filter(function (d) { return d.Country == couName })
+
+			var temp= allData.filter(function (d) { return d.Country == couName })
 
 			console.log(temp)
 			document.getElementById("CountryCard").style.display = 'block';
 			document.getElementById("modedemploi").style.display = 'none';
 
-			highlight(couName, allData.filter(function (d) { return d.share_gdp != "" }).length)
+			//highlight(couName, allData.filter(function (d) { return d.share_gdp != "" }).length)
 
 			document.getElementById("countrySel").innerHTML = temp[0].Country;
 
