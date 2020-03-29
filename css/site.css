@@ -389,3 +389,25 @@ margin-left:5%;
     color: #04629a;
 
 }
+
+#warning{
+
+       
+      margin-left: 5%; 
+      
+      margin-right: 5%; 
+      padding:1rem;
+      background: #FFFFFF;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+      -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+      -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+      /*pointer-events: none;*/  
+
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #04629a;
+}
