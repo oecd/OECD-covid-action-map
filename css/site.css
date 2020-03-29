@@ -411,3 +411,11 @@ margin-left:5%;
       font-weight: 700;
       color: #04629a;
 }
+
+#warningtext{
+
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: #04629a;
+}
