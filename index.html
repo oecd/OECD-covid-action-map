@@ -14,12 +14,62 @@
 	<script src="libs/d3-queue.v3.min.js"></script>
 	<script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 
+<script>
+
+	dataLayer = [{
+
+		"siteName": "oecd.github.io/OECD-covid-action-map",
+
+		"siteEnvironment": "live",
+
+		"pageLanguage": "en",         // or "en" or "es"
+
+		"contentLanguage": "English",  // or "English" or "French"
+
+		"pageTopic": "Economics",
+
+		"pageSubTopic": "",
+
+		"pageCountry": "",
+
+		"pageCategory": ""
+
+	}];
+
+</script>
+
+
+
+<!-- Google Tag Manager -->
+
+<script>(function (w, d, s, l, i) {
+		w[l] = w[l] || []; w[l].push({
+			'gtm.start':
+
+				new Date().getTime(), event: 'gtm.js'
+		}); var f = d.getElementsByTagName(s)[0],
+
+			j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+
+				'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+
+	})(window, document, 'script', 'dataLayer', 'GTM-P5JSM4P');</script>
+
+<!-- End Google Tag Manager -->
+
 </head>
 
 <body>
+
+	<!-- Google Tag Manager (noscript) -->
+	
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P5JSM4P" height="0" width="0"
+			style="display:none;visibility:hidden"></iframe></noscript>
+	
+	<!-- End Google Tag Manager (noscript) -->
 	<Br />
-	<div id="warning">The country policy tracker will be available here <u>on March 30</u><Br/> <span id="warningtext">In the meantime, you can find OECD information on the impacts and consequences of the coronavirus pandemic on our lives and our societies at <a href="https://www.oecd.org/coronavirus">oecd.org/coronavirus</a></span></div>
-	<!--<div id="aboutMap"></div>
+	<!--<div id="warning">The country policy tracker will be available here <u>on March 30</u><Br/> <span id="warningtext">In the meantime, you can find OECD information on the impacts and consequences of the coronavirus pandemic on our lives and our societies at <a href="https://www.oecd.org/coronavirus">oecd.org/coronavirus</a></span></div>-->
+	<div id="aboutMap"></div>
 	<div id="modedemploi">Mouse over countries and click for more information   
 				<div id="selCountry">
 					<div class="dropdown_text">Or select a country: </div>
@@ -113,10 +163,10 @@
 		</div>
 		<Br/>	
 	</div>
-	
 	<div id="updateTag">Beta version - Updated every day at 10am Paris time</div>
 	<a id="source" href="https://oecd.github.io/OECD-covid-action-map/data/CoronavirusUpdate_AllCountries_Public.xlsx" target="_blank">Download the data</a>
--->
+	<div id="copyright">© 2020 Organisation for Economic Co-operation and Development</div>
+
 </body>
 <script type="text/javascript">
 

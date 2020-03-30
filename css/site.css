@@ -372,25 +372,35 @@ annotation.badge path.subject-pointer, .annotation.badge path.subject {
 
 
 #updateTag{
-margin-left:5%;
- font-family: 'Noto Sans', sans-serif;
-    font-weight: 300;
-    font-size: 1.5rem;
-    font-style:normal;
-    color: #04629a;
+  margin-left:5%;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+  font-style:normal;
+  color: #04629a;
 }
 
 #source{
-margin-left:5%;
- font-family: 'Noto Sans', sans-serif;
-    font-weight: 300;
-    font-size: 1.5rem;
+  margin-left:5%;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1.5rem;
   text-decoration: underline;
-    color: #04629a;
+  color: #04629a;
 
 }
 
-#warning{
+#copyright{
+  margin-top:7px;
+  margin-left:5%;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+  font-style:normal;
+  color: #04629a;
+}
+
+/*#warning{
 
        
       margin-left: 5%; 
@@ -404,7 +414,6 @@ margin-left:5%;
       -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
       -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-      /*pointer-events: none;*/  
 
       font-family: 'Oswald', sans-serif;
       font-size: 2.5rem;
@@ -418,4 +427,4 @@ margin-left:5%;
       font-size: 2rem;
       font-weight: 300;
       color: #04629a;
-}
+}*/
