@@ -341,7 +341,7 @@ annotation.badge path.subject-pointer, .annotation.badge path.subject {
 }
 
 #country_dropdown{
-  margin: 2px 0px 5px 10px;
+  margin: 5px 0px 5px 0px;
   display:inline;
  font-family: 'Noto Sans', sans-serif;
     font-weight: 300;
@@ -360,10 +360,11 @@ annotation.badge path.subject-pointer, .annotation.badge path.subject {
   -webkit-font-smoothing: antialiased;
 }
 .dropdown_text{
+  display: inline-block;
   margin-left:5px;
   font-family: 'Noto Sans', sans-serif;
     font-weight: 300;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     color: #ffffff;
   text-align:start;
 
