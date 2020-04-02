@@ -103,9 +103,9 @@ div.tooltip::after {
       right: 0; 
       margin-left: auto; 
       margin-right: auto;
-      max-width:500px;
+      max-width:400px;
       
-      padding:1rem;
+      padding:0.5rem;
       background: #FFFFFF;
       -webkit-border-radius: 2px;
       -moz-border-radius: 2px;
@@ -117,7 +117,7 @@ div.tooltip::after {
 
       margin-left: 1.2em;
       font-family: 'Oswald', sans-serif;
-      font-size: 2rem;
+      font-size: 1.75rem;
       font-weight: 700;
       color: #04629a;
 }
@@ -327,8 +327,8 @@ annotation.badge path.subject-pointer, .annotation.badge path.subject {
 
 #selCountry{
   /*float:left;*/
-  max-width:450px;
-  margin-bottom:7px;
+  max-width:400px;
+  margin-bottom:2px;
   border:solid;
   border-width: 0px;
   border-color:  #575757;
@@ -363,11 +363,11 @@ annotation.badge path.subject-pointer, .annotation.badge path.subject {
   margin-left:5px;
   font-family: 'Noto Sans', sans-serif;
     font-weight: 300;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: #ffffff;
   text-align:start;
 
-  padding:5px 25px 5px 10px;
+  padding:3px 25px 3px 10px;
 }
 
 
