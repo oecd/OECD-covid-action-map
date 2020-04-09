@@ -162,6 +162,8 @@
 			<div id="Monetary_Prudential_Text" class="SectionText"></div>
 		</div>
 		<Br/>	
+		<div id="noteCountry"></div>
+		<Br />
 	</div>
 	<div id="updateTag">Beta version - Updated every day at 10am Paris time</div>
 	<a id="source" href="https://oecd.github.io/OECD-covid-action-map/data/CoronavirusUpdate_AllCountries_Public.xlsx" target="_blank">Download the data</a>
@@ -444,6 +446,11 @@
 				else
 					document.getElementById("Monetary_Prudential_Text").innerHTML = "<b>Monetary policy / Macro-prudential regulation</b><Br/>"+ d.data.Monetary_Prudential
 
+				if(d.data.Country=="Kosovo")
+					document.getElementById("noteCountry").innerHTML = "<b>Note on Kosovo</b>: This designation is without prejudice to positions on status, and is in line with United Nations Security Council Resolution 1244/99 and the Advisory Opinion of the International Court of Justice on Kosovo's declaration of independence."
+				else
+					document.getElementById("noteCountry").innerHTML = ""
+					
 				
 			});
 			
@@ -973,6 +980,11 @@
 			else
 				document.getElementById("Monetary_Prudential_Text").innerHTML = "<b>Monetary policy / Macro-prudential regulation</b><Br/>" + temp[0].Monetary_Prudential
 
+			if (d.data.Country == "Kosovo")
+				document.getElementById("noteCountry").innerHTML = "<b>Note on Kosovo</b>: This designation is without prejudice to positions on status, and is in line with United Nations Security Council Resolution 1244/99 and the Advisory Opinion of the International Court of Justice on Kosovo's declaration of independence."
+			else
+				document.getElementById("noteCountry").innerHTML = ""
+				
 		}
 	
 	d3.select("#shutter")

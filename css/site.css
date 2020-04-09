@@ -225,6 +225,16 @@ div.tooltip::after {
     font-size: 1.5rem;
     color: #0b1e2d;
 }
+
+
+#noteCountry{
+    margin-top:0.75em;
+    margin-left: 2em;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 100;
+    font-size: 1rem;
+    color: #0b1e2d;
+}
 .annotation path {
   fill: none;
   stroke: #F58380;
