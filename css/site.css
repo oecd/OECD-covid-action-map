@@ -493,7 +493,7 @@ text-decoration: underline;
   border-color:  #575757;
   background-color: #04629a;/** CHange background color for dropdowns**/
   border-radius: 10px;
-  display: none; /** TO REMOVE TO SHOW COMPARISON FEATURE
+  display: none; /** TO REMOVE TO SHOW COMPARISON FEATURE*/
 }
 
 
