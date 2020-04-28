@@ -496,35 +496,35 @@ function setDropdown(data){
 			document.getElementById("updateTime").innerHTML = "Updated on " + temp[0].update;
 
 			if (temp[0].quarantines == "" && temp[0].travel_Bans == "" && temp[0].schools_closure == "" && temp[0].public_events_cancel == "")
-				document.getElementById("containement_Title").innerHTML = "Containment measures"
+				document.getElementById("containement_Title").innerHTML = ""
 			else
 				document.getElementById("containement_Title").innerHTML = "Containment measures"
 
-			if (temp[0].quarantines == "")
-				document.getElementById("quarantine_Text").innerHTML = "<b>Quarantine/Confinement</b><Br/>"
+			if (temp[0].quarantines == "" || temp[0].quarantines == "Information not available")
+				document.getElementById("quarantine_Text").innerHTML = ""
 			else{
 				document.getElementById("quarantine_Text").innerHTML = "<b>Quarantine/Confinement</b><Br/>" + temp[0].quarantines
 				document.getElementById("quarantine_Text2").innerHTML = temp[0].quarantines
 			}
 
-			if (temp[0].travel_Bans == "")
-				document.getElementById("travel_Bans_Text").innerHTML = "<b>Travel bans/restrictions</b><Br/>"
+			if (temp[0].travel_Bans == "" || temp[0].travel_Bans == "Information not available")
+				document.getElementById("travel_Bans_Text").innerHTML = ""
 			else{
 				document.getElementById("travel_Bans_Text").innerHTML = "<b>Travel bans/restrictions</b><Br/>" + temp[0].travel_Bans
 				document.getElementById("travel_Bans_Text2").innerHTML = temp[0].travel_Bans
 
 			}
 				
-			if (temp[0].schools_closure == "")
-				document.getElementById("schools_closure_Text").innerHTML = "<b>Closure of schools/universities</b><Br/>"
+			if (temp[0].schools_closure == "" || temp[0].schools_closure  == "Information not available")
+				document.getElementById("schools_closure_Text").innerHTML = ""
 			else{
 				document.getElementById("schools_closure_Text").innerHTML = "<b>Closure of schools/universities</b><Br/>" + temp[0].schools_closure
 				document.getElementById("schools_closure_Text2").innerHTML =  temp[0].schools_closure
 
 			}
 				
-			if (temp[0].public_events_cancel == "")
-				document.getElementById("public_events_cancel_Text").innerHTML = "<b>Cancellation of public events / Closure of public places</b><Br/>"
+			if (temp[0].public_events_cancel == "" || temp[0].public_events_cancel == "Information not available")
+				document.getElementById("public_events_cancel_Text").innerHTML = ""
 			else{
 				document.getElementById("public_events_cancel_Text").innerHTML = "<b>Cancellation of public events / Closure of public places</b><Br/>" + temp[0].public_events_cancel
 				document.getElementById("public_events_cancel_Text2").innerHTML = temp[0].public_events_cancel
@@ -533,43 +533,43 @@ function setDropdown(data){
 
 
 			if (temp[0].Health == "" && temp[0].Overall_fiscal_measures == "" && temp[0].Fiscal_people == "" && temp[0].Fiscal_firm == "" && temp[0].Monetary_Prudential == "")
-				document.getElementById("support_Title").innerHTML = "Support measures"
+				document.getElementById("support_Title").innerHTML = ""
 			else
 				document.getElementById("support_Title").innerHTML = "Support measures"
 
-			if (temp[0].Health == "")
-				document.getElementById("Health_Text").innerHTML = "<b>Health</b><Br/><i>Information not available</i>"
+			if (temp[0].Health == "" || temp[0].Health == "Information not available")
+				document.getElementById("Health_Text").innerHTML = ""
 			else{
 				document.getElementById("Health_Text").innerHTML = "<b>Health</b><Br/>" + temp[0].Health
 				document.getElementById("Health_Text2").innerHTML = temp[0].Health
 
 			}
 				
-			if (temp[0].Overall_fiscal_measures == "")
-				document.getElementById("Overall_fiscal_measures_Text").innerHTML = "<b>Fiscal measures - overall</b><Br/>"
+			if (temp[0].Overall_fiscal_measures == "" || temp[0].Overall_fiscal_measures == "Information not available")
+				document.getElementById("Overall_fiscal_measures_Text").innerHTML = ""
 			else{
 				document.getElementById("Overall_fiscal_measures_Text").innerHTML = "<b>Fiscal measures - overall</b><Br/>" + temp[0].Overall_fiscal_measures
 				document.getElementById("Overall_fiscal_measures_Text2").innerHTML = temp[0].Overall_fiscal_measures
 
 			}
 				
-			if (temp[0].Fiscal_people == "")
-				document.getElementById("Fiscal_people_Text").innerHTML = "<b>Fiscal measures - people specific</b><Br/>"
+			if (temp[0].Fiscal_people == "" || temp[0].Fiscal_people == "Information not available")
+				document.getElementById("Fiscal_people_Text").innerHTML = ""
 			else{
 				document.getElementById("Fiscal_people_Text").innerHTML = "<b>Fiscal measures - people specific</b><Br/>" + temp[0].Fiscal_people
 				document.getElementById("Fiscal_people_Text2").innerHTML = temp[0].Fiscal_people
 			}
 				
-			if (temp[0].Fiscal_firm == "")
-				document.getElementById("Fiscal_firm_Text").innerHTML = "<b>Fiscal measures - company specific</b><Br/>"
+			if (temp[0].Fiscal_firm == "" || temp[0].Fiscal_firm == "Information not available")
+				document.getElementById("Fiscal_firm_Text").innerHTML = ""
 			else{
 				document.getElementById("Fiscal_firm_Text").innerHTML = "<b>Fiscal measures - company specific</b><Br/>" + temp[0].Fiscal_firm
 				document.getElementById("Fiscal_firm_Text2").innerHTML = temp[0].Fiscal_firm
 
 			}
 				
-			if (temp[0].Monetary_Prudential == "")
-				document.getElementById("Monetary_Prudential_Text").innerHTML = "<b>Monetary policy / Macro-prudential regulation</b><Br/>"
+			if (temp[0].Monetary_Prudential == "" || temp[0].Monetary_Prudential == "Information not available")
+				document.getElementById("Monetary_Prudential_Text").innerHTML = ""
 			else{
 				document.getElementById("Monetary_Prudential_Text").innerHTML = "<b>Monetary policy / Macro-prudential regulation</b><Br/>" + temp[0].Monetary_Prudential
 				document.getElementById("Monetary_Prudential_Text2").innerHTML = temp[0].Monetary_Prudential
