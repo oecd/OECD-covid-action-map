@@ -705,7 +705,7 @@
 								if(k.level == "choroplethDesc"){
 									if (!(temp[0][k.code] == "" || temp[0][k.code] == "Information not available")){
 										console.log(k.code.replace("__Description", "__Level"))
-										countryText = countryText + "<div  class=\"SectionText\"><b>" + k.title + "</b><span class=\"levelValue\">(level: "+ temp[0][k.code.replace("__Description", "__Level")]+")</span><br/>" + temp[0][k.code] + "</div><Br/>";
+										countryText = countryText + "<div  class=\"SectionText\"><b>" + k.title + "</b>" +/**"<span class=\"levelValue\">(level: "+ temp[0][k.code.replace("__Description", "__Level")]+")</span>"+**/"<br/>" + temp[0][k.code] + "</div><Br/>";
 
 									}
 								}else{
