@@ -18,6 +18,7 @@
 	<script src="libs/d3-queue.v3.min.js"></script>
 	<script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 	<script src="js/compChart.js"></script>
+	<script src="js/smallmultiple.js"></script>
 	<link rel="icon" href="img/favicon.ico" >
 <script>
 
@@ -67,20 +68,28 @@
 
 	<!-- Google Tag Manager (noscript) -->
 	
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P5JSM4P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P5JSM4P" height="0" width="0"
+			style="display:none;visibility:hidden"></iframe></noscript>
 	
 	<!--End Google Tag Manager (noscript) -->
 	
 	<!--<div id="warning">The country policy tracker will be available here <u>on March 30</u><Br/> <span id="warningtext">In the meantime, you can find OECD information on the impacts and consequences of the coronavirus pandemic on our lives and our societies at <a href="https://www.oecd.org/coronavirus">oecd.org/coronavirus</a></span></div>-->
-	
 
-	<!--</div>-->
+	<div id="toplayer">
+		<a id="OECDLogoLink" href="https://www.oecd.org/coronavirus">
+		<div id="banner">
+			<p><img id="OECDLogo" src="img/OECD_20cm_w.png"></img></p>
+			<p id="bannertext">Tackling <span id="corona">Coronavirus</span> (COVID-19): <span id="keybanner">contributing to a global effort</span><img id="bannerimg" src="img/Coronavirus_Banner.png"></img></p>
+		</div>
+		</a>
+		<div id="introPara">What are countries doing to contain the spread of the coronavirus? How are countries helping people, small businesses and the economy to weather the crisis and beyond? This Country Policy Tracker helps you to navigate the global response.</div>
+		<!--<h1>Country Policy Tracker</h1>-->
+	</div>
 
-	<h1>Country Policy Tracker</h1>
 	<!--<div class="flex-container">
 		<button class="button grey" id="Dimension" type="submit"
 			value="Containment-measures__Confinement-and-lock-downs__Level" title="Housing" onclick="updateMap(value)"><span
-				class="textbtn">Confinement and lock downs</span></button>
+				class="textbtn">Confinement and lockdowns</span></button>
 		<button class="button grey" id="Dimension" type="submit"
 			value="Containment-measures__Travel-bans-and-restrictions__Level" title="Housing"
 			onclick="updateMap(value)"><span class="textbtn">Travel bans and restrictions</span></button>
@@ -92,16 +101,11 @@
 				places</span></button>
 		<button class="button grey" id="Dimension" type="submit"
 			value="Containment-measures__Obligatory-shut-down-of-economic-activities__Level" title="Housing"
-			onclick="updateMap(value)"><span class="textbtn">Obligatory shut down of economic activities</span></button>
+			onclick="updateMap(value)"><span class="textbtn">Mandatory shutdown of economic activities</span></button>
 	</div>
-	<div class="flex-container-legend" id="legendChoropleth">
-		<div id="navigHeader">Level:</div>
-		<div id="scaleLegend"></div>
-		<div id="resetButton"><img id="resetcross" src="img/cross.svg"> <span id= resetText>Reset map &nbsp;</span></div>
-	
+	<div class="flex-container" id="introIndex">
+	This index simply records the strictness of government policies on a scale of 0 (no special policy) to 5 (strictest policies). It doesn't interpret the effectiveness of a country’s response.
 	</div>-->
-	<div id="aboutMap"></div>
-
 	<div id="modedemploi">
 		<div id="#intromodedemploi">Select a country:
 		</div>
@@ -111,7 +115,15 @@
 			</select>
 		</div>
 	</div>
+	<!--<div class="flex-container-legend" id="legendChoropleth">
+		<div id="navigHeader">Level:</div>
+		<div id="scaleLegend"></div>
+		<div id="resetButton"><img id="resetcross" src="img/cross.svg"> <span id= resetText>Reset map &nbsp;</span></div>
 	
+	</div>-->
+	<div id="aboutMap"></div>
+
+
 	<!--<div class="navigHeader">Policy responses by subject:</div>-->
 	<!--<div class="flex-container" id="switchtracker">
 		<button class="button green allData" id="allData" type="submit" value="allData"
@@ -123,14 +135,22 @@
 		<!--<button class="button green allhealth" id="" type="submit" value="allhealth" onclick="updateSelector(value),updateCircle(allhealth)"><span class="textbtn"><b>Visualise</b><br />health policy responses</span></button>
 				<button class="button green alltax" id="" type="submit" value="alltax" onclick="updateSelector(value),updateCircle(alltax)"><span class="textbtn"><b>Visualise</b><br />tax policy responses</span></button>-->
 	</div>
-	
-	<div class="flex-container" id="switchtracker">
+	<div class="flex-container" id="Downloadbanner">
+				<div id="source">Download underlying data:</div>
+				<a class="toData" id="toEcoData"
+					href="https://oecd.github.io/OECD-covid-action-map/data/CoronavirusUpdate_AllCountries_Public.xlsx"
+					target="_blank">Fiscal and Monetary</a>
+				<a class="toData" id="toElSData"
+					href="http://www.oecd.org/social/Covid-19-Employment-and-Social-Policy-Responses-by-Country.xlsx"
+					target="_blank">Employment and Social</a>
+				<a class="toData" id="toHealthData" href="http://www.oecd.org/health/COVID19-OECD-Health-System-Response-Tracker.xlsx"
+					target="_blank">Health</a>
+
+</div>	
+<div class="flex-container" id="switchtracker">
 		<div id="trackersNotes">
-			<div id="updateTag">Beta version - last database update on <span id="date"></span></div>
-			<div id="source">Download underlying data</div>
-				<a class="toData" id="toEcoData" href="https://oecd.github.io/OECD-covid-action-map/data/CoronavirusUpdate_AllCountries_Public.xlsx" target="_blank">Fiscal and Monetary</a>
-				<a class="toData" id="toElsData" href="http://www.oecd.org/social/Covid-19-Employment-and-Social-Policy-Responses-by-Country.xlsx" target="_blank">Employment and Social</a>
-		
+			<div id="updateTag">Last database update on <span id="date"></span></div>
+
 	<div id="copyright">© 2020 Organisation for Economic Co-operation and Development</div>
 	</div>
 	
@@ -149,8 +169,8 @@
 				<div id="trackersText"><b>Find more country policy responses in these policy tracking initiatives:</b><Br />
 					<ul>
 						<li><a href="http://www.oecd.org/education/coronavirus-education-country-notes.htm" target="_blank">Education policy responses by country</a></li>
-						<!--<li><a href="http://www.oecd.org/social/Covid-19-Employment-and-Social-Policy-Responses-by-Country.xlsx" target="_blank">Employment and social policy responses by country</a></li>-->
-						<li><a href="http://www.oecd.org/health/COVID19-OECD-Health-System-Response-Tracker.xlsx" target="_blank">Health policy responses by country</a></li>
+						<!--<li><a href="http://www.oecd.org/social/Covid-19-Employment-and-Social-Policy-Responses-by-Country.xlsx" target="_blank">Employment and social policy responses by country</a></li>
+						<li><a href="http://www.oecd.org/health/COVID19-OECD-Health-System-Response-Tracker.xlsx" target="_blank">Health policy responses by country</a></li>-->
 						<li><a href="https://stip.oecd.org/Covid.html" target="_blank">Science and innovation policy responses by country</a></li>
 						<li><a href="http://www.oecd.org/chemicalsafety/pesticides-biocides/emergency-responses-for-the-supply-of-disinfectants-against-covid-19.htm" target="_blank">Supply of disinfectants against Covid-19 responses by country</a></li>
 						<li><a href="http://www.oecd.org/tax/covid-19-tax-policy-and-other-measures.xlsm" target="_blank">Tax policy responses by country</a></li>
@@ -162,7 +182,7 @@
 			<div id="shutterholder" >
 				<img id="shutter" src="img/cross.svg">
 				<div id="countrySel"></div>
-				<div id="betaTag">&nbsp;Beta</div>
+				<!--<div id="betaTag">&nbsp;Beta</div>-->
 					<div id="updateTime"></div>
 				<div id="flex-container_comp">
 					
@@ -201,9 +221,9 @@
 	var xScale;
 	var yScale ;
 
-	var selector = "allData";
+	var selector = "allcontext";
 	var selectorArray, selectorVariables; 
-	var worldData, confinementdef, allcontext, allcontextvariables, allData, allVariables, alljobs, alljobsvariables;
+	var worldData, confinementdef, allcontext, allcontextvariables, allData, allVariables, alljobs, alljobsvariables,allhealth,allhealthvariables;
 
 	var allcircles=[];
 	var country4card;
@@ -217,6 +237,8 @@
 		variables: "data/variables.tsv",
 		jobs: "data/jobs.tsv",
 		jobsvariables:"data/jobsvariables.tsv",
+		health: "data/health.tsv",
+		healthvariables: "data/healthvariables.tsv",
 	};
 
 	var divMap = d3.select("body").append("div") 
@@ -226,7 +248,8 @@
     var format = d3.format(",.1f");
     var margin = 20,centered;
 
-	var mapRatio=0.375;
+	var mapRatio=0.41;
+	var mapScale;
     
     var width = document.getElementById("aboutMap").offsetWidth,
     	height= width*mapRatio;
@@ -238,10 +261,15 @@
 	var circleColor=d3.scaleOrdinal()
 			.domain(["alldata", "alljobs", "allhealth", "alltax"])
 			.range(['#39617D', '#8cc841', '#8cc841', '#8cc841'])
-			
+
+	if(width>750)
+		mapScale= 6.7;
+	else
+		mapScale=6.3
+
   	var projection = d3.geoRobinson()
-	    		.scale(width/7.75)
-	    		.translate([width / 2, 6*height / 10])
+	    		.scale(width/mapScale)
+	    		.translate([width / 2, 5.7*height / 10])
   	        	.precision(.01);
 
   	var path = d3.geoPath()
@@ -272,6 +300,8 @@
 		.defer(d3.tsv, urls.variables)
 		.defer(d3.tsv, urls.jobs)
 		.defer(d3.tsv, urls.jobsvariables)
+		.defer(d3.tsv, urls.health)
+		.defer(d3.tsv, urls.healthvariables)
 	    .await(render);
 
 	var scalesvg = d3.select("#scaleLegend").append("svg")
@@ -285,11 +315,15 @@
 				.attr("x", function (d) { return 5+(d+1)*35; })
 				.attr("width", function (d) { return 30; })
 				.style("fill", function (d) { return quarantinecolor(d); });
-		scalesvg.selectAll("text").data([0, 1, 2, 3, 4, 5])
+		scalesvg.selectAll("text").data(["No data",0, 1, 2, 3, 4, 5])
 				.enter().append("text")
 				.attr("class", function (d) { return "legendtext" + " textvalue"+d;})
 				.attr("y", 35)
-				.attr("x", function (d) { return 17.5 + (d + 1)* 35; })
+				.attr("x", function (d) { 
+					if (d!="No data")
+						return 17.5 + (d + 1)* 35;
+					else
+						return 0 ;})
 				//.attr("width", function (d) { return 10; })
 				.text( function (d) { return d; });
 
@@ -315,8 +349,7 @@
 	})
 }
 
-	function render(err,world,country, context, contextvariables, actions,variables,jobs,jobsvariables){
-
+	function render(err,world,country, context, contextvariables, actions,variables,jobs,jobsvariables,health, healthvariables){
 		worldData=world;
 		allcontext= context;
 		allcontextvariables= contextvariables;
@@ -324,6 +357,8 @@
 		allVariables=variables;
 		alljobs= jobs;
 		alljobsvariables= jobsvariables;
+		allhealth = health;
+		allhealthvariables = healthvariables;
 
 		//Container for the gradients //https://www.visualcinnamon.com/2016/06/glow-filter-d3-visualization.html
 		var defs = worldMap.append("defs");
@@ -381,6 +416,9 @@
 				var button2update = "." + currentURL.split("?")[1];
 				d3.selectAll(".green").style("background", "#548235")
 				d3.selectAll(button2update).style("background", "#0b1e2d")
+
+				if (currentURL.split("?")[2] != "")
+					updateCard(currentURL.split("?")[2])
 			}
 			else if (currentURL.split("?")[1] == "alltax") {
 
@@ -390,7 +428,23 @@
 				var button2update = "." + currentURL.split("?")[1];
 				d3.selectAll(".green").style("background", "#548235")
 				d3.selectAll(button2update).style("background", "#0b1e2d")
+
+				if (currentURL.split("?")[2] != "")
+					updateCard(currentURL.split("?")[2])
 			
+			}
+			else if (currentURL.split("?")[1] == "allcontext") {
+
+				updateSelector(currentURL.split("?")[1]);
+				//				updateCircle(alltax)
+
+				var button2update = "." + currentURL.split("?")[1];
+				d3.selectAll(".green").style("background", "#548235")
+				d3.selectAll(button2update).style("background", "#0b1e2d")
+
+				if (currentURL.split("?")[2] != "")
+					updateCard(currentURL.split("?")[2])
+
 			}//else{
 				///////////////////////////////
 				///////////////////////////////
@@ -485,7 +539,9 @@
 				var htmlText = "<b>" + d.data.Country + "</b>";
 				divMap.html(htmlText)
 					.style("left", event.pageX - document.body.scrollLeft + "px")
-					.style("top", event.pageY - document.body.scrollTop + "px");
+					.style("top", event.pageY /*- document.body.scrollTop*/ + "px");
+					
+
 
 				})
 			
@@ -493,7 +549,7 @@
 
 				divMap
 					.style("left", event.pageX - document.body.scrollLeft + 10 + "px")
-					.style("top", event.pageY - document.body.scrollTop + "px");
+					.style("top", event.pageY + "px");
 
 			})
 			.on('mouseout', function (d) {
@@ -520,10 +576,14 @@
 		width = document.getElementById("aboutMap").offsetWidth,
 			height = width * mapRatio;
 
+		if (width > 750)
+			mapScale = 6.7;
+		else
+			mapScale = 6.3
 		// update projection
 		projection
 			.translate([width / 2, 6 * height / 10])
-			.scale(width / 7.75);
+			.scale(width / mapScale);
 
 		// resize the map container
 		svg.attr('width', width + 'px')
@@ -565,8 +625,8 @@
 				//TO COMPLETE WITHTRACKERS/////
 				///////////////////////////////
 				///////////////////////////////
-		selectorArray=[allData, alljobs, allcontext]	
-		selectorVariables = [allVariables, alljobsvariables, allcontextvariables]	
+		selectorArray=[allcontext, allData, alljobs, allhealth]	
+		selectorVariables = [allcontextvariables,allVariables, alljobsvariables, allhealthvariables]	
 	
 		var selData,selVariables;
 		if(selector=="allData"){
@@ -656,7 +716,7 @@
 
 		document.getElementById("countrySel").innerHTML = temp[0].Country;
 
-		document.getElementById("updateTime").innerHTML = "Country data updated on " + temp[0].update;
+		document.getElementById("updateTime").innerHTML = "Country initiatives updated on " + temp[0].update;
 		
 		var navText="";
 		
@@ -671,31 +731,31 @@
 		
 		//if(allcontext.find(isPresent)) // replaced as find not read in explorer
 		if (typeof allcontext.filter(function (x) { return x.ISO3 === couCode })[0] !== "undefined")
-			var themenav = "<button class=\"button menuCard allcontext\"  type=\"submit\" value=\"allcontext\" onclick = \"updateSelector(value),/*updateCircle(allcontext),*\/updateCard(country4card)\" >Context</button >";
+			var themenav = "<button class=\"button menuCard allcontext\"  type=\"submit\" value=\"allcontext\" onclick = \"updateSelector(value),/*updateCircle(allcontext),*\/updateCard(country4card)\" >Context<Br>OECD indicators</button >";
 
 		//if(allData.find(isPresent))
 		if (typeof allData.filter(function (x) { return x.ISO3 === couCode })[0] !== "undefined")
-			var themenav = themenav + "<button class=\"button menuCard allData\"  type=\"submit\" value=\"allData\" onclick = \"updateSelector(value),/*updateCircle(allData),*\/updateCard(country4card)\" >Fiscal and Monetary</button >";
+			var themenav = themenav + "<button class=\"button menuCard allData\"  type=\"submit\" value=\"allData\" onclick = \"updateSelector(value),/*updateCircle(allData),*\/updateCard(country4card)\" >Fiscal and Monetary<Br>initiatives</button >";
 
 		//if (alljobs.find(isPresent)) // does not work with explorer
 		if (typeof alljobs.filter(function (x) { return x.ISO3 === couCode })[0] !== "undefined")
-			var themenav = themenav + "<button class=\"button menuCard alljobs\"  type=\"submit\" value=\"alljobs\" onclick = \"updateSelector(value),/*updateCircle(alljobs),*\/updateCard(country4card)\" >Employment and Social</button >";
+			var themenav = themenav + "<button class=\"button menuCard alljobs\"  type=\"submit\" value=\"alljobs\" onclick = \"updateSelector(value),/*updateCircle(alljobs),*\/updateCard(country4card)\" >Employment and Social<Br>initiatives</button >";
+
+		//if (allhealth.find(isPresent)) // does not work with explorer
+		if (typeof allhealth.filter(function (x) { return x.ISO3 === couCode })[0] !== "undefined")
+			var themenav = themenav + "<button class=\"button menuCard allhealth\"  type=\"submit\" value=\"allhealth\" onclick = \"updateSelector(value),/*updateCircle(allhealth),*\/updateCard(country4card)\" >Health<Br>initiatives</button >";
 
 
 		selVariables.forEach(function(d){
 				if (d.level== "SectionTitle"){
 					var count = 0; 
-					selVariables.filter(function (k) { return k.hierarchy.split("-")[0] == d.hierarchy.split("-")[0] && k.hierarchy.split("-")[2]  == "text"}).forEach(function (k) {
-						
+					selVariables.filter(function (k) { return k.hierarchy.split("-")[0] == d.hierarchy.split("-")[0] && k.hierarchy.split("-")[2]  == "text"}).forEach(function (k) {	
 							if (!(temp[0][k.code] == "" || temp[0][k.code] == "Information not available")) {
 								count++;
-							}
-						
-
+							}						
 					})
 
 					if (count >0){
-						
 						countryText = countryText + "<div class=\"border\" id=\"" + d.title.replace(/ /g, "") + "\" ><span class=\"SectionTitle\">" + d.title + "</span></div><Br/>"
 						navText = navText + "<a class=\"couNav\" href=\"#" + d.title.replace(/ /g, "") + "\">" + d.title + "</a><Br/>"
 						
@@ -703,22 +763,35 @@
 							if (k.level == "SectionText" || k.level == "choroplethDesc") {
 								if(k.level == "choroplethDesc"){
 									if (!(temp[0][k.code] == "" || temp[0][k.code] == "Information not available")){
-										console.log(k.code.replace("__Description", "__Level"))
 										countryText = countryText + "<div  class=\"SectionText\"><b>" + k.title + "</b>"+/**"<span class=\"levelValue\">(level: "+ temp[0][k.code.replace("__Description", "__Level")]+")</span>"+**/"<br/>" + temp[0][k.code] + "</div><Br/>";
-
 									}
 								}else{
 									if (!(temp[0][k.code] == "" || temp[0][k.code] == "Information not available"))
 										countryText = countryText + "<div  class=\"SectionText\"><b>" + k.title + "</b><br/>" + temp[0][k.code] + "</div><Br/>";
-	
 								}
 							}/* else if (k.level == "SectionChart") {
 								if (!(temp[0][k.code] == "" || temp[0][k.code] == "Information not available" ))
 									countryText = countryText + "<div class=\"SectionChart\" id =\"" + k.code + "_Label\"><b>" + k.title + "</b> - <i>" + k.unit + "</i></div><br/><div class=\"SectionChart\" id=\"" + k.code + "\"></div><Br/>";
-							} else if (k.level == "SectionEmbed") {
+							}*/ else if (k.level == "SectionEmbed") {
 							if (!(temp[0][k.code] == "" || temp[0][k.code] == "Information not available"))
-								countryText = countryText + "<div class=\"SectionEmbed\"><b>" + k.title + "</b> - <i>" + k.unit + "</i></div><br/>" + temp[0][k.code] + "<Br/>";
-							}*/
+								countryText = countryText + "<div class=\"SectionEmbed\">" + temp[0][k.code] + "</div><br>";
+							}
+							else if (k.level == "SectionTable") {
+								if (!(temp[0][k.code] == "" || temp[0][k.code] == "Information not available")){
+									countryText = countryText + "<div class=\"SectionTable\" id =\"" + k.code + "_Table\">" + k.title + "</span></div><div class=\"tableCountry\" id=\"" + k.code + "\"><span class=\"tableLabel\">"+ JSON.parse(temp[0][k.code])[0]["country"] +"</span><span class=\"tableValue\">" + JSON.parse(temp[0][k.code])[0]["value"] + "</span> <span class=\"tableUnitValue\">" + k.unit + "</span><span class=\"tableYear\">" + JSON.parse(temp[0][k.code])[0]["year"] + "</span><br><span class=\"tableLabel\">" + JSON.parse(temp[0][k.code])[1]["country"] + "</span><span class=\"tableValue\">" + JSON.parse(temp[0][k.code])[1]["value"] + "</span> <span class=\"tableUnitValue\">" + k.unit + "</span><span class=\"tableYear\">" + JSON.parse(temp[0][k.code])[1]["year"] +"</span></div><Br/>";
+									
+								}
+							} else if (k.level == "sectionChartContext") {
+								
+								var titleChart= k.code+"_title"
+								var unitChart = k.code + "_unit"
+								countryText = countryText + "<div class=\"sectionChartContextFlex\" ><div class=\"sectionChartContext_title\" id =\"" + k.code + "_Label\"><b>" + temp[0][titleChart] + "</b> <br> <i>" + temp[0][unitChart] + "</i></div><br/><div class=\"sectionChartContext_chart\" id=\"" + k.code + "\"></div></div>";
+							
+								d3.xml(temp[0][k.code],function(data){
+									smallMultiples(data,k.code)
+								})
+								
+							}
 						})
 					}
 				}	
@@ -795,7 +868,7 @@
 					var cathighlight=".cat"+i;
 					worldMap
 						.selectAll(cathighlight)
-						.style("opacity", 0.2)
+						.style("opacity", 0.05)
 				}
 				
 			}
@@ -812,7 +885,7 @@
 			htmlText="Not available";
 			divMap.html(htmlText)
 				.style("left", event.pageX - document.body.scrollLeft + 10 + "px")
-				.style("top", event.pageY - document.body.scrollTop + "px");
+				.style("top", event.pageY /*- document.body.scrollTop*/ + "px");
 
 			divMap.transition()
 				.duration(250)
@@ -823,7 +896,7 @@
 
 			divMap
 				.style("left", event.pageX - document.body.scrollLeft + 10 + "px")
-				.style("top", event.pageY - document.body.scrollTop + "px");
+				.style("top", event.pageY /*- document.body.scrollTop*/ + 20+ "px");
 
 		})
 		.on("mouseout",function(d){
@@ -837,8 +910,11 @@
 
 		}) 
 
+	document.getElementById("introIndex").style.visibility = 'visible';
 	document.getElementById("legendChoropleth").style.visibility = 'visible';
 	document.getElementById("resetButton").style.visibility = 'visible';
+
+	
 	
 	worldMap
 		.selectAll("path")
@@ -897,7 +973,7 @@
 
 			divMap.html(htmlText)
 				.style("left", event.pageX - document.body.scrollLeft + "px")
-				.style("top", event.pageY - document.body.scrollTop + "px");
+				.style("top", event.pageY /*- document.body.scrollTop*/ + "px");
 
 		})
 
@@ -905,7 +981,7 @@
 
 			divMap
 				.style("left", event.pageX - document.body.scrollLeft + 10 + "px")
-				.style("top", event.pageY - document.body.scrollTop + "px");
+				.style("top", event.pageY /*- document.body.scrollTop*/ + "px");
 
 		})
 		.on('mouseout', function (d) {
@@ -985,6 +1061,7 @@
 			.attr('fill', "#c0c7c9")
 			.style("opacity", 0.75)
 
+		document.getElementById("introIndex").style.visibility = 'hidden';
 		document.getElementById("legendChoropleth").style.visibility = 'hidden';
 		document.getElementById("resetButton").style.visibility = 'hidden';
 
@@ -1008,7 +1085,7 @@
 
 				divMap.html(htmlText)
 					.style("left", event.pageX - document.body.scrollLeft + "px")
-					.style("top", event.pageY - document.body.scrollTop + "px");
+					.style("top", event.pageY /*- document.body.scrollTop*/ + "px");
 
 			})
 
@@ -1016,7 +1093,7 @@
 
 				divMap
 					.style("left", event.pageX - document.body.scrollLeft + 10 + "px")
-					.style("top", event.pageY - document.body.scrollTop + "px");
+					.style("top", event.pageY /*- document.body.scrollTop*/ + "px");
 
 			})
 			.on('mouseout', function (d) {
@@ -1036,7 +1113,13 @@
 	})
 
 
-
+	if (window.location !== window.parent.location) {	  
+		// The page is in an iframe	
+		document.getElementById("toplayer").style.display = "none"
+		} else {	  
+			// The page is not in an iframe	
+		console.log("not an iframe")
+			}
 
 </script>
 
