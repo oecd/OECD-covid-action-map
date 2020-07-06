@@ -20,7 +20,7 @@ function smallMultiples(data,identifier) {
 
      
     // set the dimensions and margins of the graph
-    var marginSmall = { top: 10, right: 10, bottom: 30, left: 30 },widthSmall,heightSmall;
+    var marginSmall = { top: 10, right: 10, bottom: 30, left: 45 },widthSmall,heightSmall;
     if(width>500){
         widthSmall = 0.4 * width - marginSmall.left - marginSmall.right;
         heightSmall = 250 - marginSmall.top - marginSmall.bottom;
