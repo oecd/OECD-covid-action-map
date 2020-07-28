@@ -746,21 +746,23 @@
 		document.getElementById("dataportallink").style.display = 'none';
 		//if(allcontext.find(isPresent)) // replaced as find not read in explorer
 		if (typeof allcontext.filter(function (x) { return x.ISO3 === couCode })[0] !== "undefined"){
-			var themenav = "<button class=\"button menuCard allcontext\"  type=\"submit\" value=\"allcontext\" onclick = \"updateSelector(value),/*updateCircle(allcontext),*\/updateCard(country4card)\" >Context<Br>OECD indicators</button >";
+			themenav = "<button class=\"button menuCard allcontext\"  type=\"submit\" value=\"allcontext\" onclick = \"updateSelector(value),/*updateCircle(allcontext),*\/updateCard(country4card)\" >Context<Br>OECD indicators</button >";
 			document.getElementById("dataportallink").style.display = 'block';
 		}
 			
 		//if(allData.find(isPresent))
 		if (typeof allData.filter(function (x) { return x.ISO3 === couCode })[0] !== "undefined")
-			var themenav = themenav + "<button class=\"button menuCard allData\"  type=\"submit\" value=\"allData\" onclick = \"updateSelector(value),/*updateCircle(allData),*\/updateCard(country4card)\" >Fiscal and Monetary<Br>initiatives</button >";
+			themenav = themenav + "<button class=\"button menuCard allData\"  type=\"submit\" value=\"allData\" onclick = \"updateSelector(value),/*updateCircle(allData),*\/updateCard(country4card)\" >Fiscal and Monetary<Br>initiatives</button >";
 
 		//if (alljobs.find(isPresent)) // does not work with explorer
 		if (typeof alljobs.filter(function (x) { return x.ISO3 === couCode })[0] !== "undefined")
-			var themenav = themenav + "<button class=\"button menuCard alljobs\"  type=\"submit\" value=\"alljobs\" onclick = \"updateSelector(value),/*updateCircle(alljobs),*\/updateCard(country4card)\" >Employment and Social<Br>initiatives</button >";
+			themenav = themenav + "<button class=\"button menuCard alljobs\"  type=\"submit\" value=\"alljobs\" onclick = \"updateSelector(value),/*updateCircle(alljobs),*\/updateCard(country4card)\" >Employment and Social<Br>initiatives</button >";
 
 		//if (allhealth.find(isPresent)) // does not work with explorer
 		if (typeof allhealth.filter(function (x) { return x.ISO3 === couCode })[0] !== "undefined")
-			var themenav = themenav + "<button class=\"button menuCard allhealth\"  type=\"submit\" value=\"allhealth\" onclick = \"updateSelector(value),/*updateCircle(allhealth),*\/updateCard(country4card)\" >Health<Br>initiatives</button >";
+			themenav = themenav + "<button class=\"button menuCard allhealth\"  type=\"submit\" value=\"allhealth\" onclick = \"updateSelector(value),/*updateCircle(allhealth),*\/updateCard(country4card)\" >Health<Br>initiatives</button >";
+
+		themenav = themenav + "<button class=\"button menuCard\"  id=\"toTrackersBtnCP\"  >More policy<Br>responses</button >";
 
 
 		selVariables.forEach(function(d){
@@ -820,6 +822,13 @@
 		document.getElementById("navbar").innerHTML = navText;
 		document.getElementById("singleCountry").innerHTML= countryText
 
+
+		d3.select("#toTrackersBtnCP")
+			.on("click", function () {
+				
+				document.getElementById("CountryCard").style.display = 'none';
+				document.getElementById("trackersLink").style.display = 'block';
+			})
 
 		var elmnt = document.getElementById("themebar");
 		elmnt.scrollIntoView(false);
@@ -1050,10 +1059,9 @@
 			document.getElementById("trackersLink").style.display = 'none';
 		})
     
-		d3.select("#toTrackersBtn")
-				.on("click", function () {
-					document.getElementById("trackersLink").style.display = 'block';
-				})
+	
+		
+
 
 	d3.selectAll(".button.grey")
 		.on("click", function () {
