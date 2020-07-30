@@ -19,6 +19,10 @@ intensive_hos_bed	SectionTable	III-III-text	Intensive care beds	per 100 000 popu
 	SectionTitle	IV	Well-being – OECD indicators	
 intro_wellbeing	SectionText	IV-I-text		
 income_poverty	SectionEmbed	IV-II-chart	Population living in relative income poverty	%
+Housing_overcrowding	SectionEmbed	IV-III-chart	Housing overcrowding	%
+Trust_in_government	SectionEmbed	IV-IV-chart	Trust in government	%
+Suicide_rate	SectionEmbed	IV-V-chart	Suicide rate	%
+Lack_of_social_support	SectionEmbed	IV-VI-chart	Lack of social support	%
 	SectionTitle	V	Economic impact – OECD indicators	
 unemployment	SectionEmbed	V-0-chart	Unemployment Rate	%
 intro_eco_impact	SectionText	V-I-text	Composite Leading indicator component series	
