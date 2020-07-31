@@ -407,7 +407,7 @@ width:87.5%;
 }
 
 .greybckd{
-  float:right;
+  margin-left:100px;
 
     background: #4f91b8;
 }
